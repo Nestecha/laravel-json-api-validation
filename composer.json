@@ -1,0 +1,55 @@
+{
+    "name": "nestecha/laravel-json-api-validation",
+    "description": "Lets you use Laravel native validation to return JSON API compliant errors.",
+    "keywords": [
+        "nestecha",
+        "laravel-json-api-validation"
+    ],
+    "homepage": "https://github.com/nestecha/laravel-json-api-validation",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Chamaillard Steve",
+            "email": "steve@kang.fr",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "cloudcreativity/laravel-json-api": "^1.6",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nestecha\\LaravelJsonApiValidation\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nestecha\\LaravelJsonApiValidation\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nestecha\\LaravelJsonApiValidation\\LaravelJsonApiValidationServiceProvider"
+            ],
+            "aliases": {
+                "LaravelJsonApiValidation": "Nestecha\\LaravelJsonApiValidation\\LaravelJsonApiValidationFacade"
+            }
+        }
+    }
+}
