@@ -116,11 +116,3 @@ class ValidationTest extends TestCase
         }
     }
 }
-
-class ExampleController
-{
-    public function store(Request $request)
-    {
-        $this->validateAsJsonApi($request->all(), $rules);
-    }
-}
