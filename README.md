@@ -74,7 +74,7 @@ php artisan vendor:publish --tag=config
 ```
 
 ### For Lumen :
-To add a code to the errors, [a base config file is available](https://github.com/Nestecha/laravel-json-api-validation/blob/master/config/config.php), simply copy paste it into your config folder named `json-api-validation.php`.
+To add a code to the errors, [a base config file is available](https://github.com/Nestecha/laravel-json-api-validation/blob/master/config/config.php), simply copy paste it into your config folder as `json-api-validation.php`.
 Then in `bootstrap/app.php` add this line :
 
 ``` php
