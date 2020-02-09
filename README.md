@@ -89,6 +89,8 @@ return [
 ];
 ```
 
+### To customize the config filename
+
 `json-api-validation.php` is the default config filename. You can customize the validator by passing a string in the constructor :
 
 ``` php
