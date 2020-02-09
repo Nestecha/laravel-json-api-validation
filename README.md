@@ -28,8 +28,8 @@ Go in `App\Exceptions\Handler.php` and change the `render` method :
  */
 public function render($request, Exception $exception)
 {
-    if ($exception instanceof Nestecha\LaravelJsonApiValidation\Exception\JsonApiValidationException) {
-        $responseFactory = new Nestecha\LaravelJsonApiValidation\ResponseFactory();
+    if ($exception instanceof \Nestecha\LaravelJsonApiValidation\Exception\JsonApiValidationException) {
+        $responseFactory = new \Nestecha\LaravelJsonApiValidation\ResponseFactory();
         return $responseFactory->fromErrors($exception->errors()->getArrayCopy());
     }
 
@@ -41,7 +41,7 @@ Then, in your controller :
 ``` php
 public function home(Request $request)
 {
-    $validator = new Nestecha\LaravelJsonApiValidation\JsonApiValidator();
+    $validator = new \Nestecha\LaravelJsonApiValidation\JsonApiValidator();
     $validator->validateAsJsonApi($request->all(), ['title' => 'required']);
 
     // ...
