@@ -8,6 +8,7 @@
     "homepage": "https://github.com/nestecha/laravel-json-api-validation",
     "license": "MIT",
     "type": "library",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Chamaillard Steve",
