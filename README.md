@@ -74,11 +74,11 @@ php artisan vendor:publish --tag=config
 ```
 
 ### For Lumen :
-To add a code to the errors, add a config file in the config directory.
+To add a code to the errors, [a base config file is available](https://github.com/Nestecha/laravel-json-api-validation/blob/master/config/config.php), simply copy paste it into your config folder named `json-api-validation.php`.
 Then in `bootstrap/app.php` add this line :
 
 ``` php
-$app->configure('name-of-your-config-file');
+$app->configure('json-api-validation');
 ```
 
 Then fill the config file with codes for the rules you need :
@@ -99,9 +99,7 @@ public function home(Request $request)
     $validator = new JsonApiValidator('name-of-your-config-file');
     $validator->validateAsJsonApi($request->all(), ['title' => 'required']);
 }
-```
-
-[A base config file is available](https://github.com/Nestecha/laravel-json-api-validation/blob/master/config/config.php), simply copy paste it into your config folder. 
+``` 
 
 ### Testing
 
