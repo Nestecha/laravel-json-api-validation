@@ -16,7 +16,6 @@ You can install the package via composer:
 composer require nestecha/laravel-json-api-validation
 ```
 
-### For Lumen :
 Go in `App\Exceptions\Handler.php` and change the `render` method :
 ``` php
 /**
@@ -68,7 +67,13 @@ This would yield :
     ]
 }
 ```
+### For Laravel :
+To add a code to the errors, use this artisan command to copy the default config file to your config folder.
+```bash
+php artisan vendor:publish --tag=config
+```
 
+### For Lumen :
 To add a code to the errors, add a config file in the config directory.
 Then in `bootstrap/app.php` add this line :
 
