@@ -1,11 +1,12 @@
-# Very short description of the package
+# Creates JSON API compliant responses for errors
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nestecha/laravel-json-api-validation.svg?style=flat-square)](https://packagist.org/packages/nestecha/laravel-json-api-validation)
 [![Build Status](https://img.shields.io/travis/nestecha/laravel-json-api-validation/master.svg?style=flat-square)](https://travis-ci.org/nestecha/laravel-json-api-validation)
 [![Quality Score](https://img.shields.io/scrutinizer/g/nestecha/laravel-json-api-validation.svg?style=flat-square)](https://scrutinizer-ci.com/g/nestecha/laravel-json-api-validation)
 [![Total Downloads](https://img.shields.io/packagist/dt/nestecha/laravel-json-api-validation.svg?style=flat-square)](https://packagist.org/packages/nestecha/laravel-json-api-validation)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This package helps returning JSON API compliant errors while using the native Laravel validation logic.
+Also, it lets you add unique codes to your validation rules which makes it easier on the consumer end.
 
 ## Installation
 
@@ -15,11 +16,85 @@ You can install the package via composer:
 composer require nestecha/laravel-json-api-validation
 ```
 
-## Usage
+### For Lumen :
+Go in `App\Exceptions\Handler.php` and change the `render` method :
+``` php
+/**
+ * Render an exception into an HTTP response.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @param  \Exception  $exception
+ * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+ */
+public function render($request, Exception $exception)
+{
+    if ($exception instanceof Nestecha\LaravelJsonApiValidation\Exception\JsonApiValidationException) {
+        $responseFactory = new Nestecha\LaravelJsonApiValidation\ResponseFactory();
+        return $responseFactory->fromErrors($exception->errors()->getArrayCopy());
+    }
+
+    return parent::render($request, $exception);
+}
+```
+
+Then, in your controller :
+``` php
+public function home(Request $request)
+{
+    $validator = new Nestecha\LaravelJsonApiValidation\JsonApiValidator();
+    $validator->validateAsJsonApi($request->all(), ['title' => 'required']);
+
+    // ...
+}
+```
+
+This would yield :
+``` json
+{
+    "errors": [
+        {
+            "status": "422",
+            "title": "Unprocessable Entity",
+            "detail": "The title field is required.",
+            "source": {
+                "pointer": "\/data\/attributes\/title"
+            },
+            "meta": {
+                "failed": {
+                    "rule": "required"
+                }
+            }
+        }
+    ]
+}
+```
+
+To add a code to the errors, add a config file in the config directory.
+Then in `bootstrap/app.php` add this line :
 
 ``` php
-// Usage description here
+$app->configure('name-of-your-config-file');
 ```
+
+Then fill the config file with codes for the rules you need :
+
+``` php
+return [
+    'required' => ['code' => 'VALIDATION_ERROR_REQUIRED']
+];
+```
+
+`json-api-validation.php` is the default config filename. You can customize the validator by passing a string in the constructor :
+
+``` php
+public function home(Request $request)
+{
+    $validator = new JsonApiValidator('name-of-your-config-file');
+    $validator->validateAsJsonApi($request->all(), ['title' => 'required']);
+}
+```
+
+[A base config file is available](https://github.com/Nestecha/laravel-json-api-validation/blob/master/config/config.php), simply copy paste it into your config folder. 
 
 ### Testing
 
@@ -47,7 +122,3 @@ If you discover any security related issues, please email steve@kang.fr instead 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
