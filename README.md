@@ -81,14 +81,6 @@ Then in `bootstrap/app.php` add this line :
 $app->configure('json-api-validation');
 ```
 
-Then fill the config file with codes for the rules you need :
-
-``` php
-return [
-    'required' => ['code' => 'VALIDATION_ERROR_REQUIRED']
-];
-```
-
 ### To customize the config filename
 
 `json-api-validation.php` is the default config filename. You can customize the validator by passing a string in the constructor :
