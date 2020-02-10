@@ -3,12 +3,11 @@
 namespace Nestecha\LaravelJsonApiValidation\Tests;
 
 use CloudCreativity\LaravelJsonApi\LaravelJsonApi;
-use Illuminate\Http\Request;
 use Neomerx\JsonApi\Document\Error;
 use Nestecha\LaravelJsonApiValidation\Exception\JsonApiValidationException;
 use Nestecha\LaravelJsonApiValidation\JsonApiValidator;
-use Orchestra\Testbench\TestCase;
 use Nestecha\LaravelJsonApiValidation\LaravelJsonApiValidationServiceProvider;
+use Orchestra\Testbench\TestCase;
 
 class ValidationTest extends TestCase
 {
@@ -48,8 +47,21 @@ class ValidationTest extends TestCase
             $this->assertEquals(422, $error->getStatus());
             $this->assertEquals('Unprocessable Entity', $error->getTitle());
             $this->assertEquals('The title field is required.', $error->getDetail());
-            $this->assertEquals(['pointer' => '/data/attributes/title'], $error->getSource());
+            $this->assertEquals(['pointer' => '/data/attributes/title', 'value' => ''], $error->getSource());
             $this->assertEquals(['failed' => ['rule' => 'required']], $error->getMeta());
+        }
+    }
+
+    /** @test */
+    public function the_error_should_contain_the_value_of_the_field_erroring_out_in_the_source()
+    {
+        try {
+            $this->validator->validateAsJsonApi(['title' => 'lorem 1234'], ['title' => 'max:3']);
+        } catch (JsonApiValidationException $exception) {
+            /** @var Error $error */
+            $error = $exception->errors()[0];
+
+            $this->assertEquals(['pointer' => '/data/attributes/title', 'value' => 'lorem 1234'], $error->getSource());
         }
     }
 

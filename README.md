@@ -56,7 +56,8 @@ This would yield :
             "title": "Unprocessable Entity",
             "detail": "The title field is required.",
             "source": {
-                "pointer": "\/data\/attributes\/title"
+                "pointer": "\/data\/attributes\/title",
+                "value": ""
             },
             "meta": {
                 "failed": {

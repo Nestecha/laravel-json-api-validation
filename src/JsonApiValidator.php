@@ -39,7 +39,7 @@ class JsonApiValidator
             $rules,
             [],
             [],
-            function ($field, $message, $failures) use ($configName)
+            function ($field, $message, $failures) use ($configName, $data)
             {
                 $errorCode = null;
                 if (!empty(config("{$configName}.{$failures['rule']}.code"))) {
@@ -58,7 +58,7 @@ class JsonApiValidator
                     $errorCode,
                     "Unprocessable Entity",
                     $message,
-                    ['pointer' => "/data/attributes/$field"],
+                    ['pointer' => "/data/attributes/$field", 'value' => data_get($data, $field)],
                     ['failed' => $failures]
                 );
             }
