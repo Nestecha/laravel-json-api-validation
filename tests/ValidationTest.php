@@ -127,4 +127,40 @@ class ValidationTest extends TestCase
             $this->assertEquals('ERROR_CODE_REQUIRED', $error->getCode());
         }
     }
+
+    /** @test */
+    public function custom_error_messages_should_change_the_detail_but_not_the_code()
+    {
+        $validator = new JsonApiValidator();
+
+        config(['json-api-validation' => ['required' => ['code' => 'ERROR_CODE_REQUIRED']]]);
+
+        try {
+            $validator->validateAsJsonApi([], ['title' => 'required'], ['required' => 'The :attribute is custom.']);
+        } catch (JsonApiValidationException $exception) {
+            /** @var Error $error */
+            $error = $exception->errors()[0];
+
+            $this->assertEquals('ERROR_CODE_REQUIRED', $error->getCode());
+            $this->assertEquals('The title is custom.', $error->getDetail());
+        }
+    }
+
+    /** @test */
+    public function custom_error_attributes_should_change_the_field_translation_but_not_the_error_code()
+    {
+        $validator = new JsonApiValidator('custom-validation-name');
+
+        config(['custom-validation-name' => ['required' => ['code' => 'ERROR_CODE_REQUIRED']]]);
+
+        try {
+            $validator->validateAsJsonApi([], ['title' => 'required'], [], ['title' => 'Taytle']);
+        } catch (JsonApiValidationException $exception) {
+            /** @var Error $error */
+            $error = $exception->errors()[0];
+
+            $this->assertEquals('ERROR_CODE_REQUIRED', $error->getCode());
+            $this->assertEquals('The Taytle field is required.', $error->getDetail());
+        }
+    }
 }

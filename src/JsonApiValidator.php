@@ -23,9 +23,11 @@ class JsonApiValidator
     /**
      * @param  array  $data
      * @param  array  $rules
+     * @param  array  $messages
+     * @param  array  $customAttributes
      * @throws JsonApiValidationException
      */
-    public function validateAsJsonApi(array $data, array $rules)
+    public function validateAsJsonApi(array $data, array $rules, array $messages = [], array $customAttributes = [])
     {
         $originalValidationFailuresSetting = LaravelJsonApi::$validationFailures;
         LaravelJsonApi::showValidatorFailures();
@@ -37,8 +39,8 @@ class JsonApiValidator
         $validator = $factory->createValidator(
             $data,
             $rules,
-            [],
-            [],
+            $messages,
+            $customAttributes,
             function ($field, $message, $failures) use ($configName, $data)
             {
                 $errorCode = null;
