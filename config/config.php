@@ -46,7 +46,7 @@ return [
     ],
     'image' => ['code' => 'VALIDATION_ERROR_IMAGE'],
     'in' => ['code' => 'VALIDATION_ERROR_IN'],
-    'in_array' => ['code' => 'VALIDATION_ERROR_IN'],
+    'in_array' => ['code' => 'VALIDATION_ERROR_IN_ARRAY'],
     'integer' => ['code' => 'VALIDATION_ERROR_INTEGER'],
     'ip' => ['code' => 'VALIDATION_ERROR_IP'],
     'ipv4' => ['code' => 'VALIDATION_ERROR_IPV4'],
