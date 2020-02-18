@@ -96,14 +96,58 @@ public function home(Request $request)
 
 ### For custom rules :
 
-When using Laravel [custom rules](https://laravel.com/docs/master/validation#using-rule-objects), the error will format
-the rule name in kebab-case (UppercaseRule = uppercase-rule) in the meta field.
+When using Laravel [custom rules](https://laravel.com/docs/master/validation#using-rule-objects) :
+
+``` php
+class UppercaseRule implements Rule
+{
+    /**
+     * @inheritDoc
+     */
+    public function passes($attribute, $value)
+    {
+        return strtoupper($value) === $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function message()
+    {
+        return "The :attribute should be uppercase.";
+    }
+}
+```
+
 To add an error code in the config, you should use the name in kebab-case format :
 
 ``` php
 return [
     'uppercase-rule' => ['code' => 'VALIDATION_ERROR_UPPERCASE'],
 ];
+```
+
+The error will format the rule name in kebab-case in the meta field :
+
+``` json
+{
+    "errors": [
+        {
+            "status": "422",
+            "title": "Unprocessable Entity",
+            "detail": "The title should be uppercase.",
+            "source": {
+                "pointer": "\/data\/attributes\/title",
+                "value": "lowercase_title"
+            },
+            "meta": {
+                "failed": {
+                    "rule": "uppercase-rule"
+                }
+            }
+        }
+    ]
+}
 ```
 
 ### Testing
