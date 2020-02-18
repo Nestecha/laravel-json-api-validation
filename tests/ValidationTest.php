@@ -163,4 +163,51 @@ class ValidationTest extends TestCase
             $this->assertEquals('The Taytle field is required.', $error->getDetail());
         }
     }
+
+    /** @test */
+    public function a_custom_rule_is_named_as_kebab_case_in_the_failed_meta()
+    {
+        $validator = new JsonApiValidator();
+
+        try {
+            $validator->validateAsJsonApi(['title' => 'lowercase'], ['title' => [new UppercaseRule()]]);
+        } catch (JsonApiValidationException $exception) {
+            /** @var Error $error */
+            $error = $exception->errors()[0];
+
+            $this->assertEquals('uppercase-rule', $error->getMeta()['failed']['rule']);
+        }
+    }
+
+    /** @test */
+    public function a_custom_rule_error_code_in_config_uses_kebab_name()
+    {
+        $validator = new JsonApiValidator();
+
+        config(['json-api-validation' => ['uppercase-rule' => ['code' => 'ERROR_CODE_UPPERCASE']]]);
+
+        try {
+            $validator->validateAsJsonApi(['title' => 'lowercase'], ['title' => [new UppercaseRule()]]);
+        } catch (JsonApiValidationException $exception) {
+            /** @var Error $error */
+            $error = $exception->errors()[0];
+
+            $this->assertEquals('ERROR_CODE_UPPERCASE', $error->getCode());
+        }
+    }
+
+    /** @test */
+    public function a_custom_rule_should_return_its_message_in_the_detail()
+    {
+        $validator = new JsonApiValidator();
+
+        try {
+            $validator->validateAsJsonApi(['title' => 'lowercase'], ['title' => [new UppercaseRule()]]);
+        } catch (JsonApiValidationException $exception) {
+            /** @var Error $error */
+            $error = $exception->errors()[0];
+
+            $this->assertEquals("The title should be uppercase.", $error->getDetail());
+        }
+    }
 }

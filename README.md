@@ -82,7 +82,7 @@ Then in `bootstrap/app.php` add this line :
 $app->configure('json-api-validation');
 ```
 
-### To customize the config filename
+### To customize the config filename :
 
 `json-api-validation.php` is the default config filename. You can customize the validator by passing a string in the constructor :
 
@@ -93,6 +93,18 @@ public function home(Request $request)
     $validator->validateAsJsonApi($request->all(), ['title' => 'required']);
 }
 ``` 
+
+### For custom rules :
+
+When using Laravel [custom rules](https://laravel.com/docs/master/validation#using-rule-objects), the error will format
+the rule name in kebab-case (UppercaseRule = uppercase-rule) in the meta field.
+To add an error code in the config, you should use the name in kebab-case format :
+
+``` php
+return [
+    'uppercase-rule' => ['code' => 'VALIDATION_ERROR_UPPERCASE'],
+];
+```
 
 ### Testing
 
