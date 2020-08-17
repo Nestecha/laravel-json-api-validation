@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "cloudcreativity/laravel-json-api": "^2.0",
         "illuminate/support": "^7.0"
     },
