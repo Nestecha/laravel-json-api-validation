@@ -8,12 +8,25 @@
 This package helps returning JSON API compliant errors while using the native Laravel validation logic.
 Also, it lets you add unique codes to your validation rules which makes it easier on the consumer end.
 
+## Laravel / Lumen Versions
+
+| Laravel / Lumen | This Package |
+| --- | --- |
+| `^7.0` | `^2.0` |
+| `^6.0` | `^1.0` |
+
 ## Installation
 
 You can install the package via composer:
 
+- Laravel / Lumen 6
 ```bash
-composer require nestecha/laravel-json-api-validation
+composer require "nestecha/laravel-json-api-validation":"^1.0"
+```
+
+- Laravel / Lumen 7
+```bash
+composer require "nestecha/laravel-json-api-validation":"^2.0"
 ```
 
 Go in `App\Exceptions\Handler.php` and change the `render` method :
