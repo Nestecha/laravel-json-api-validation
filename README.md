@@ -20,9 +20,9 @@ Also, it lets you add unique codes to your validation rules which makes it easie
 
 You can install the package via composer:
 
-- Laravel / Lumen 6
+- Laravel / Lumen 8
 ```bash
-composer require "nestecha/laravel-json-api-validation":"^1.0"
+composer require "nestecha/laravel-json-api-validation":"^3.0"
 ```
 
 - Laravel / Lumen 7
@@ -30,9 +30,9 @@ composer require "nestecha/laravel-json-api-validation":"^1.0"
 composer require "nestecha/laravel-json-api-validation":"^2.0"
 ```
 
-- Laravel / Lumen 8
+- Laravel / Lumen 6
 ```bash
-composer require "nestecha/laravel-json-api-validation":"^3.0"
+composer require "nestecha/laravel-json-api-validation":"^1.0"
 ```
 
 Go in `App\Exceptions\Handler.php` and change the `render` method :
