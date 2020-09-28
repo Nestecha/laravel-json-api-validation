@@ -12,6 +12,7 @@ Also, it lets you add unique codes to your validation rules which makes it easie
 
 | Laravel / Lumen | This Package |
 | --- | --- |
+| `^8.0` | `^3.0` |
 | `^7.0` | `^2.0` |
 | `^6.0` | `^1.0` |
 
