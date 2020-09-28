@@ -30,6 +30,11 @@ composer require "nestecha/laravel-json-api-validation":"^1.0"
 composer require "nestecha/laravel-json-api-validation":"^2.0"
 ```
 
+- Laravel / Lumen 8
+```bash
+composer require "nestecha/laravel-json-api-validation":"^3.0"
+```
+
 Go in `App\Exceptions\Handler.php` and change the `render` method :
 ``` php
 /**
