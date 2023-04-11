@@ -2,7 +2,6 @@
 
 namespace Nestecha\LaravelJsonApiValidation;
 
-use CloudCreativity\LaravelJsonApi\Factories\Factory;
 use CloudCreativity\LaravelJsonApi\LaravelJsonApi;
 use Illuminate\Validation\ValidationException;
 use Neomerx\JsonApi\Document\Error;
