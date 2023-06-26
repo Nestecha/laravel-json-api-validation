@@ -12,6 +12,7 @@ Also, it lets you add unique codes to your validation rules which makes it easie
 
 | Laravel / Lumen | This Package |
 |-----------------|--------------|
+| `^10.0`         | `^5.0`       |
 | `^9.0`          | `^4.0`       |
 | `^8.0`          | `^3.0`       |
 | `^7.0`          | `^2.0`       |
@@ -20,6 +21,11 @@ Also, it lets you add unique codes to your validation rules which makes it easie
 ## Installation
 
 You can install the package via composer:
+
+- Laravel / Lumen 10
+```bash
+composer require "nestecha/laravel-json-api-validation":"^5.0"
+```
 
 - Laravel / Lumen 9
 ```bash
