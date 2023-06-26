@@ -3,7 +3,7 @@
 namespace Nestecha\LaravelJsonApiValidation;
 
 use Illuminate\Http\JsonResponse;
-use Neomerx\JsonApi\Document\Error;
+use Neomerx\JsonApi\Schema\Error;
 
 class ResponseFactory
 {

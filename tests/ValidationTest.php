@@ -3,7 +3,7 @@
 namespace Nestecha\LaravelJsonApiValidation\Tests;
 
 use CloudCreativity\LaravelJsonApi\LaravelJsonApi;
-use Neomerx\JsonApi\Document\Error;
+use Neomerx\JsonApi\Schema\Error;
 use Nestecha\LaravelJsonApiValidation\Exception\JsonApiValidationException;
 use Nestecha\LaravelJsonApiValidation\JsonApiValidator;
 use Nestecha\LaravelJsonApiValidation\LaravelJsonApiValidationServiceProvider;

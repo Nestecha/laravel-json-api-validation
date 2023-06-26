@@ -1,6 +1,6 @@
 <?php
 
-use Neomerx\JsonApi\Document\Error as JsonError;
+use Neomerx\JsonApi\Schema\Error as JsonError;
 use Nestecha\LaravelJsonApiValidation\ResponseFactory;
 use Orchestra\Testbench\TestCase;
 
@@ -12,11 +12,13 @@ class CreateResponseTest extends TestCase
         $error = new JsonError(
             'ERROR_UNIQUE_IDENTIFIER',
             null,
+            null,
             422,
             'ERROR_CODE',
             "Unprocessable Entity",
             "The title field is required.",
             ['pointer' => "/data/attributes/title"],
+            true,
             ['failed' => ['rule' => 'required']]
         );
 

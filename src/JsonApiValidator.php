@@ -4,7 +4,7 @@ namespace Nestecha\LaravelJsonApiValidation;
 
 use CloudCreativity\LaravelJsonApi\LaravelJsonApi;
 use Illuminate\Validation\ValidationException;
-use Neomerx\JsonApi\Document\Error;
+use Neomerx\JsonApi\Schema\Error;
 use Nestecha\LaravelJsonApiValidation\Exception\JsonApiValidationException;
 
 class JsonApiValidator
@@ -55,11 +55,13 @@ class JsonApiValidator
                 return new Error(
                     null,
                     null,
+                    null,
                     422,
                     $errorCode,
                     "Unprocessable Entity",
                     $message,
                     ['pointer' => "/data/attributes/$field", 'value' => data_get($data, $field)],
+                    true,
                     ['failed' => $failures]
                 );
             }
